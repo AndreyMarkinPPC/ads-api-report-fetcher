@@ -31,15 +31,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Format image tag
-        run: |
-          IMAGE_TAGS=${{ steps.meta.outputs.tags }}
-          IMAGE_TAGS=$(echo ${IMAGE_TAGS//-py/})
-          echo $IMAGE_TAGS
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: py/.
           push: true
-          tags: ${{ env.IMAGE_TAGS }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
