@@ -6,7 +6,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gaarf-py
-  
+
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
@@ -31,14 +31,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: character-replacement-test
+      - name: Format image tag
         run: |
-          IMAGE_TAG=${{ steps.meta.outputs.tags }}
-          IMAGE_TAG="${IMAGE_TAG//-py/}"
+          IMAGE_TAGS=${{ steps.meta.outputs.tags }}
+          IMAGE_TAGS="${IMAGE_TAG//-py/}"
+          IMAGE_TAGS=($(for IMAGE_TAG in "${IMAGE_TAGS[@]}"; do echo "${IMAGE_TAG//-py/}"; done))
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: py/.
           push: true
-          tags: ${{ env.IMAGE_TAG }}
+          tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}
