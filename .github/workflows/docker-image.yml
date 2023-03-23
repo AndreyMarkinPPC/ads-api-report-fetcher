@@ -5,8 +5,7 @@ on:
     tags: [ "*-py" ]
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: gaarf_py
-
+  IMAGE_NAME: google/gaarf-py 
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
