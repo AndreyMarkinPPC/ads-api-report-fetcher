@@ -31,6 +31,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: character-replacement-test
+        run: |
+          IMAGE_TAG=${{ steps.meta.outputs.tags }}
+          IMAGE_TAG="${IMAGE_TAG//-py/}"
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
