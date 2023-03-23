@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    tags: [ "v*-py" ]
+    tags: [ "*-py" ]
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gaarf_py
