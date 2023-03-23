@@ -34,7 +34,6 @@ jobs:
       - name: Format image tag
         run: |
           IMAGE_TAGS=${{ steps.meta.outputs.tags }}
-          IMAGE_TAGS="${IMAGE_TAG//-py/}"
           IMAGE_TAGS=($(for IMAGE_TAG in "${IMAGE_TAGS[@]}"; do echo "${IMAGE_TAG//-py/}"; done))
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
