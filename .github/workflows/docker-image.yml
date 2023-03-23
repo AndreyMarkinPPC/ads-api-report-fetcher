@@ -5,7 +5,7 @@ on:
     tags: [ "v*-py" ]
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: gaarf-py
+  IMAGE_NAME: gaarf_py
 
 jobs:
   build-and-push-image:
